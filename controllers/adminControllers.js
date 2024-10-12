@@ -14,6 +14,7 @@ const listaUsuarios = async (req, res) => {
     });
   }
 };
+
 const crearVehiculo = async (req, res) => {
   const { foto, nombre, color, modelo, precio } = req.body;
 
@@ -38,4 +39,18 @@ const crearVehiculo = async (req, res) => {
   }
 };
 
-module.exports = { crearVehiculo, listaUsuarios };
+const listaVehiculos = async (req, res) => {
+  try {
+    const listaVehiculos = await Vehiculo.find();
+
+    res.status(200).json({
+      listaVehiculos,
+    });
+  } catch (error) {
+    res.status(500).json({
+      msg: "Por favor contactarse con el administrador",
+    });
+  }
+};
+
+module.exports = { crearVehiculo, listaUsuarios, listaVehiculos };
