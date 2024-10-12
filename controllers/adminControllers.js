@@ -1,6 +1,19 @@
 const Usuario = require("../models/usuario_model");
 const Vehiculo = require("../models/vehiculo_model");
 
+const listaUsuarios = async (req, res) => {
+  try {
+    const listaUsuarios = await Usuario.find();
+
+    res.status(200).json({
+      listaUsuarios,
+    });
+  } catch (error) {
+    res.status(500).json({
+      msg: "Por favor contactarse con el administrador",
+    });
+  }
+};
 const crearVehiculo = async (req, res) => {
   const { foto, nombre, color, modelo, precio } = req.body;
 
@@ -25,4 +38,4 @@ const crearVehiculo = async (req, res) => {
   }
 };
 
-module.exports = crearVehiculo;
+module.exports = { crearVehiculo, listaUsuarios };
