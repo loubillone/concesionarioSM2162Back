@@ -1,11 +1,10 @@
 const Usuario = require("../models/usuario_model");
 const bcrypt = require("bcrypt");
-var jwt = require("jsonwebtoken");
 
 const crearUsuario = async (req, res) => {
   const { name, email, password } = req.body;
 
-  // console.log(req.body);
+  console.log(req.body);
 
   if (!name || !email || !password) {
     return res.status(400).json({
@@ -15,7 +14,7 @@ const crearUsuario = async (req, res) => {
 
   try {
     let usuario = await Usuario.findOne({ email });
-    // console.log(usuario);
+    console.log(usuario);
 
     if (usuario) {
       return res.status(400).json({
@@ -28,7 +27,7 @@ const crearUsuario = async (req, res) => {
     const salt = bcrypt.genSaltSync(10);
     usuario.password = bcrypt.hashSync(password, salt);
 
-    // console.log(usuario.password);
+    console.log(usuario.password);
 
     await usuario.save();
 

@@ -77,10 +77,24 @@ const editarVehiculo = async (req, res) => {
 
 const eliminarVehiculo = async (req, res) => {
   try {
-    const eliminarVehiculo = await Vehiculo.findById(req.params.id);
+    const vehiculoElmininar = await Vehiculo.findById(req.params.id);
 
-    console.log(eliminarVehiculo);
-  } catch (error) {}
+    if (!vehiculoElmininar) {
+      return res.status(400).json({
+        msg: "El vehículo a eliminar no existe",
+      });
+    }
+
+    await Vehiculo.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+      msg: "Vehiculo eliminado",
+    });
+  } catch (error) {
+    res.status(500).json({
+      msg: "Por favor contactarse con el administrador",
+    });
+  }
 };
 
 module.exports = {
