@@ -75,9 +75,18 @@ const editarVehiculo = async (req, res) => {
   }
 };
 
+const eliminarVehiculo = async (req, res) => {
+  try {
+    const eliminarVehiculo = await Vehiculo.findById(req.params.id);
+
+    console.log(eliminarVehiculo);
+  } catch (error) {}
+};
+
 module.exports = {
   crearVehiculo,
   listaUsuarios,
   listaVehiculos,
   editarVehiculo,
+  eliminarVehiculo,
 };
