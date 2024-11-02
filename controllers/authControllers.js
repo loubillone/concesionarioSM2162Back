@@ -3,11 +3,11 @@ const bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
 
 const crearUsuario = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, lastName, email, password } = req.body;
 
   // console.log(req.body);
 
-  if (!name || !email || !password) {
+  if (!name || !lastName || !email || !password) {
     return res.status(400).json({
       msg: "Todos los campos son obligatorios",
     });
