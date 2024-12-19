@@ -5,8 +5,6 @@ var jwt = require("jsonwebtoken");
 const crearUsuario = async (req, res) => {
   const { name, lastName, email, password } = req.body;
 
-  // console.log(req.body);
-
   if (!name || !lastName || !email || !password) {
     return res.status(400).json({
       msg: "Todos los campos son obligatorios",
@@ -73,6 +71,7 @@ const loginUsuario = async (req, res) => {
     // Creamos un objeto el cual definimos los datos que queremos guardar en el token
     const payload = {
       name: usuario.name,
+      lastName: usuario.lastName,
       id: usuario._id,
       rol: usuario.rol,
     };
